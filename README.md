@@ -40,9 +40,29 @@ SKEW?           - Skew value of the specified trace
 *IDN SIGLENT,SDS2304X,SDS2XJBD1R2754,1.2.2.2 R10
 
 C1:SKEW 0.00ns
+```
+
+
+SCPI replies have 3 different headers: long, short, and off. Here's the difference:
 
 
 ```
+# Long
+*IDN SIGLENT,SDS2304X,SDS2XJBD1R2754,1.2.2.2 R10
+C1:COUPLING D1M
+# Short
+*IDN SIGLENT,SDS2304X,SDS2XJBD1R2754,1.2.2.2 R10
+C1:CPL D1M
+# Off
+SIGLENT,SDS2304X,SDS2XJBD1R2754,1.2.2.2 R10
+D1M
+```
+
+
+WF? format description, mode in detail: https://siglentna.com/wp-content/uploads/dlm_uploads/2017/10/ProgrammingGuide_forSDS-1-1.pdf
+Page 142.
+The format of the descriptor can be received with the "TMPL?" query.
+
 
 # ScopeHal
 
@@ -74,8 +94,25 @@ mkdir build
 cd build
 cmake ../
 make
+```
+
+
+Use LXI to connect to Siglent scope. Command line:
 
 ```
+lldb ./src/glscopeclient/glscopeclient --debug myscope:siglent:lxi:192.168.1.177
+```
+
+# USBTMC
+
+* https://www.testandmeasurementtips.com/remote-communication-with-usbtmc-faq/
+* https://github.com/torvalds/linux/blob/master/drivers/usb/class/usbtmc.c
+* https://github.com/dpenkler/linux-usbtmc - update version of Linux kernel driver 
+* http://literature.cdn.keysight.com/litweb/pdf/5989-6718EN.pdf
+* https://www.xmos.com/download/AN00135:-USB-Test-and-Measurement-Device(2.0.0rc3).pdf
+
+    Create your own USBTMC compatible device
+
 
 # Info
 
