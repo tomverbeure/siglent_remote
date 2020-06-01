@@ -1,3 +1,66 @@
+Limitations:
+* USBTMC on Linux:
+    * 2 ways to talk to a USBTMC device
+        * usbtmc kernel driver
+        * generic libusb -> user mode driver
+        
+* USBTMC using the kernel
+    * reads can have a buffer of max 2032
+        * higher than 2032 -> USBTMC device hangs. Need to reboot scope!
+        * no way to recover: have tried various IOCTLs...
+    * kernel 4.15 (Ubuntu 18.04 LTS) code is here: https://github.com/torvalds/linux/blob/v4.17/drivers/usb/class/usbtmc.c
+         * #define USBTMC_SIZE_IOBUFFER 2048
+    * kernel 4.20 and later
+        * USBTMC_API_VERSION 2
+        * #define USBTMC_SIZE_IOBUFFER 4096
+        * timeout: still defaults to 5s, but programmable
+            * IOCTL_SET_TIMEOUT/IOCTL_GET_TIMEOUT
+        * upgrade to later kernel: https://ubuntu.com/kernel/lifecycle
+        * new API has IOCTL_API_VERSION call
+        * new include file: https://github.com/torvalds/linux/blob/master/include/uapi/linux/usb/tmc.h
+
+    * download times (size 2032):
+        * 14k: 0.07s
+        * 28k: 0.13s
+        * 140k: 0.6s
+        * 280k: 1.2s
+        * 1.4M: 5.9s -> 1.9Mbit/s
+        * 2.8M: timeout after 5s
+            * after such a timeout -> USBTMC device hangs. Need to reboot scope!
+            * 5s timeout USBTMC_TIMEOUT
+        * downloading seems to have 2 steps:
+            * preparing the data inside the scope: when this last longer than 5s, you can a timeout (using default settings)
+            * downloading the data 
+    * maximum size of waveform: 1.4M points.
+
+* libusb USBTMC driver
+    * Sigrok has one: https://sigrok.org/gitweb/?p=libsigrok.git;a=blob;f=src/scpi/scpi_usbtmc_libusb.c
+    * pyvisa-py implements a USBTMC driver in pure python: https://github.com/pyvisa/pyvisa-py/blob/master/pyvisa-py/protocols/usbtmc.py
+        * uses pyusb, which is a wrapper around (among others) libusb
+
+* LXI
+    * download times: 
+        * 14k: 0.110s
+        * 28k: 0.14s
+        * 140k: 0.45s
+        * 280k: 0.87s
+            * Wait for 0.65s after READ call -> data transfer is only 0.22s
+        * 1.4M: 4.3s
+            * Wait for 3.1s after call -> data transfer is only 1.2s
+            * First a few seconds hanging, then output
+        * 2.8M: 8.6s
+            * Wait for 6.2s after call -> data transfer is only 2.4s
+        * 14M: "failed to receive message"
+            * VXI-11 DESTROY_LINK call exactly 25s after VXI11 DEVICE_READ call:
+
+                liblxi/src/vxi11core_clnt.c (auto-generated) 
+
+                /* Default timeout can be changed using clnt_control() */
+                static struct timeval TIMEOUT = { 25, 0 };
+
+                man clnt_control -> standard RPC call
+                
+            * lxi -t 50: increase lock_timeout doesn't work
 
 Usage:
 
@@ -30,8 +93,7 @@ SARA?           - current sample rate
 ./visa_query.py 192.168.1.177 "SARA?"
 *IDN SIGLENT,SDS2304X,SDS2XJBD1R2754,1.2.2.2 R10
 
-SARA 2.00GSa/s
-```
+SARA 2.00GSa/s ```
 
 ```
 SKEW?           - Skew value of the specified trace
