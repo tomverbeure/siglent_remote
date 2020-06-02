@@ -62,6 +62,21 @@ Limitations:
                 
             * lxi -t 50: increase lock_timeout doesn't work
 
+# Siglent Remote Control Features
+
+These features are extracted from the spec sheets on the Siglent website.
+
+    * SDS5000X: USBTMC, VXI-11, telnet, socket, web
+    * SDS2000X Plus: USBTMC, VXI-11, telnet, socket
+    * SDS2000X-E: USBTMC, VXI-11, telnet, socket
+    * SDS2000X: USBTMC, VXI-11
+    * SDS1000X: USBTMC, VXI-11
+    * SDS1000X+: USBTMC, VXI-11
+    * SDS1000X-E: USBTMC, VXI-11. telnet and socket: ambiguous
+    * SDS1000CFL: "USB device; LAN Port"
+    * SDS1000DL+: USBTMC, VXI-11 
+    * SDS1000CML+: USBTMC, VXI-11 
+
 Usage:
 
 * Set IP address in the Makefile
