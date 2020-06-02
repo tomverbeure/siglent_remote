@@ -19,7 +19,7 @@ Limitations:
         * new API has IOCTL_API_VERSION call
         * new include file: https://github.com/torvalds/linux/blob/master/include/uapi/linux/usb/tmc.h
 
-    * download times (size 2032):
+    * download times (size 2032): USBTMC v1
         * 14k: 0.07s
         * 28k: 0.13s
         * 140k: 0.6s
@@ -31,6 +31,18 @@ Limitations:
         * downloading seems to have 2 steps:
             * preparing the data inside the scope: when this last longer than 5s, you can a timeout (using default settings)
             * downloading the data 
+
+    * download times (size 2032): USBTMC v2
+        * 1.4M: 5.75s
+
+    * download times (size 4080): USBTMC v2
+        * 1.4M: 5.65s
+
+    * download times (size full buffer): USBTMC v2
+        * 1.4M: 5.51s
+            * 3.1s preparation -> 2.4s data transfer = 4.6Mbps
+
+
     * maximum size of waveform: 1.4M points.
 
 * libusb USBTMC driver
