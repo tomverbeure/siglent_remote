@@ -1,3 +1,4 @@
+
 Limitations:
 * USBTMC on Linux:
     * 2 ways to talk to a USBTMC device
@@ -190,7 +191,22 @@ Use LXI to connect to Siglent scope. Command line:
 
 ```
 lldb ./src/glscopeclient/glscopeclient --debug myscope:siglent:lxi:192.168.1.177
+lldb ./src/glscopeclient/glscopeclient --debug myscope:siglent:usbtmc:/dev/usbtmc0
 ```
+
+format: 
+```
+<nick>:<driver>:<transport>:<args>
+
+<args> can be many things.
+```
+
+# FFT
+
+* 1 kHz test signal
+* 280kpts
+* 200kSa/s
+* -> glscopeclieint shows FFT peak at 1.4kHz instead of 1KHz
 
 # USBTMC
 
