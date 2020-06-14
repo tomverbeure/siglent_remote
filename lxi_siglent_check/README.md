@@ -31,10 +31,20 @@ Using it is easy:
         * Write down the IP address
         * Press `[Single]` to exit the menu
 
+* Connect the probe of channel 1 to the calibration 1kHz output
+
+* Configure the scope so that it triggers on channel 1 and so that it shows a nice square wave.
+
+    Something like this:
+
+    ![Scope screenshot](./test_waveform.png)
+
 * Run the tool
 
     `./lxi_siglent_check <IP address of the scope> | tee siglent_results.log`
 
-* Email the log to `hombre at gmail dot com`
+    When running the tool, a number of settings of the scope will be changed: vdiv, timebase, probe attenuation, 
+    number of sample points, ... Nothing major though.
 
+* Email the log to `hombre at gmail dot com`
 
