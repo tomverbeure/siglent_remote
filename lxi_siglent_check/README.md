@@ -4,7 +4,7 @@
 The goal of this program is to gather information from Siglent scopes about
 the way they support SCPI.
 
-Some scopes have bugs, others doesn't. There might be subtle differences etc.
+Some scopes have bugs, others don't. There might be subtle differences etc.
 
 The tool checks for the presence of known bugs, queries capabilities, records a 
 waveform and fetches that etc.
@@ -16,7 +16,11 @@ Using it is easy:
     On Ubuntu: `sudo apt install liblxi-dev`
 
 * Compile
-    `run.sh`
+
+    ```
+    cd ./lxi_siglent_check
+    ./run.sh
+    ```
 
 * Figure out the IP address of your Siglent scope
 
