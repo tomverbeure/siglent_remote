@@ -166,6 +166,11 @@ int main(int argc, char **argv)
     char cur_vdiv[256];
     strcpy(cur_vdiv, reply);
 
+    printf("Save offset\n");
+    query("C1:OFST?", reply, reply_size);
+    char cur_offset[256];
+    strcpy(cur_offset, reply);
+
     printf("Save sample points\n");
     query("SANU? C1", reply, reply_size);
     char cur_sample_points[256];
