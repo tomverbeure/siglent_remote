@@ -124,6 +124,8 @@ int capture_wf()
 
 int main(int argc, char **argv)
 {
+    printf("lxi_siglent_check version: %s\n", HASH);
+
     reply = malloc(reply_size);
     assert(reply);
 
