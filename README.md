@@ -1,3 +1,5 @@
+**This is my scrapbook related to my Siglent oscilloscope remote control experiments. Don't expect things to be in a structured, usable way...**
+
 
 Limitations:
 * USBTMC on Linux:
