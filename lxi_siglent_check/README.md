@@ -1,13 +1,20 @@
 
 # `LXI_SIGLENT_CHECK`
 
-The goal of this program is to gather information from Siglent scopes about
-the way they support SCPI.
+The goal of `lxi_siglent_check` is to crowd source information of Siglent oscilloscopes about
+the way they support remote control and acquisition SCPI commands.
+
+(See the [Siglent Oscilloscope Programming Guide](https://siglentna.com/wp-content/uploads/dlm_uploads/2017/10/ProgrammingGuide_forSDS-1-1.pdf).)
+
+This kind of information is really useful to make sure that tools such as
+`glscopeclient` are compatible with a large amount of Siglent scopes out there.
+Here's [a video](https://www.youtube.com/watch?v=LtLyrpRIE_0) that illustrates what 
+glscopeclient allows you to do.
 
 Some scopes have bugs, others don't. There might be subtle differences etc.
 
-The tool checks for the presence of known bugs, queries capabilities, records a 
-waveform and fetches that etc.
+`lxi_siglent_check` checks for the presence of known bugs, queries capabilities, records a 
+waveform, fetches a waveform etc.
 
 Using it is easy:
 
