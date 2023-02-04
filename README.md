@@ -123,7 +123,8 @@ SARA?           - current sample rate
 ./visa_query.py 192.168.1.177 "SARA?"
 *IDN SIGLENT,SDS2304X,SDS2XJBD1R2754,1.2.2.2 R10
 
-SARA 2.00GSa/s ```
+SARA 2.00GSa/s 
+```
 
 ```
 SKEW?           - Skew value of the specified trace
@@ -134,9 +135,7 @@ SKEW?           - Skew value of the specified trace
 C1:SKEW 0.00ns
 ```
 
-
 SCPI replies have 3 different headers: long, short, and off. Here's the difference:
-
 
 ```
 # Long
@@ -149,7 +148,6 @@ C1:CPL D1M
 SIGLENT,SDS2304X,SDS2XJBD1R2754,1.2.2.2 R10
 D1M
 ```
-
 
 WF? format description, mode in detail: https://siglentna.com/wp-content/uploads/dlm_uploads/2017/10/ProgrammingGuide_forSDS-1-1.pdf
 Page 142.
