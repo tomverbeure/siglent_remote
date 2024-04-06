@@ -2,7 +2,7 @@
 
 import pyvisa
 
-rm = pyvisa.ResourceManager('@py')
+rm = pyvisa.ResourceManager()
 print(rm.list_resources())
 
 siglent = rm.open_resource("TCPIP::192.168.1.177")
